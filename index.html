@@ -1,0 +1,157 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MFT Trader</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet"/>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #0e0e23;
+      font-family: 'Roboto', sans-serif;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    .logo {
+      width: 150px;
+      margin-bottom: 20px;
+    }
+    .custom-dropdown {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 20px;
+    }
+    .selected-option {
+      background-color: #1c1c3a;
+      color: white;
+      padding: 10px 20px;
+      border: 1px solid #333;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .options {
+      display: none;
+      position: absolute;
+      background-color: #1c1c3a;
+      border: 1px solid #333;
+      border-radius: 5px;
+      width: 100%;
+      z-index: 1;
+    }
+    .option {
+      padding: 10px 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+    .option:hover {
+      background-color: #2c2c4a;
+    }
+    .option img {
+      width: 20px;
+      height: 20px;
+      margin-right: 10px;
+    }
+    select, button {
+      padding: 10px;
+      margin: 10px;
+      background-color: #1c1c3a;
+      color: white;
+      border: 1px solid #333;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #signal {
+      font-size: 24px;
+      font-weight: bold;
+      color: #ffc107;
+      margin-top: 20px;
+    }
+    .telegram {
+      margin-top: 30px;
+      color: #00acee;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <img src="https://i.ibb.co/vh1fc13/MFT-LOGO.png" alt="MFT Logo" class="logo" />
+  <div class="custom-dropdown" id="platformDropdown">
+    <div class="selected-option" onclick="toggleOptions()">Quotex</div>
+    <div class="options" id="options">
+      <div class="option" onclick="selectOption('Quotex')"><img src="https://i.ibb.co/6tPpKgF/quotex.png" alt="Quotex" />Quotex</div>
+      <div class="option" onclick="selectOption('Binomo')"><img src="https://i.ibb.co/Lk0dx17/binomo.png" alt="Binomo" />Binomo</div>
+      <div class="option" onclick="selectOption('Pocket Option')"><img src="https://i.ibb.co/vdZQdx6/pocket.png" alt="Pocket Option" />Pocket Option</div>
+      <div class="option" onclick="selectOption('Olymp Trade')"><img src="https://i.ibb.co/gzXyKdb/olymp.png" alt="Olymp Trade" />Olymp Trade</div>
+      <div class="option" onclick="selectOption('Expert Option')"><img src="https://i.ibb.co/GF45RZt/expert.png" alt="Expert Option" />Expert Option</div>
+      <div class="option" onclick="selectOption('IQ Option')"><img src="https://i.ibb.co/W0zL1Jj/iq.png" alt="IQ Option" />IQ Option</div>
+    </div>
+  </div>
+  <select id="binaryPairs">
+    <option value="">Select Pair</option>
+    <option>EUR/USD</option>
+    <option>GBP/USD</option>
+    <option>USD/JPY</option>
+    <option>USD/CAD</option>
+    <option>AUD/USD</option>
+    <option>USD/CHF</option>
+    <option>NZD/USD</option>
+    <option>EUR/GBP</option>
+    <option>EUR/JPY</option>
+    <option>GBP/JPY</option>
+    <option>CAD/JPY</option>
+    <option>AUD/JPY</option>
+    <option>CHF/JPY</option>
+    <option>NZD/JPY</option>
+    <option>EUR/AUD</option>
+    <option>EUR/CAD</option>
+    <option>GBP/CAD</option>
+    <option>AUD/CAD</option>
+    <option>AUD/NZD</option>
+    <option>NZD/CAD</option>
+  </select>
+  <select id="timeFrame">
+    <option value="">Select Time Frame</option>
+    <option value="10">10 Seconds</option>
+    <option value="15">15 Seconds</option>
+    <option value="60">1 Minute</option>
+    <option value="300">5 Minutes</option>
+  </select>
+  <button onclick="generateSignal()">GET SIGNAL</button>
+  <div id="signal"></div>
+  <div class="telegram">@MFT_0FFICIAL</div>
+  <script>
+    function toggleOptions() {
+      const options = document.getElementById("options");
+      options.style.display = options.style.display === "block" ? "none" : "block";
+    }
+
+    function selectOption(option) {
+      document.querySelector(".selected-option").textContent = option;
+      document.getElementById("options").style.display = "none";
+    }
+
+    function generateSignal() {
+      const signals = ["BUY", "SELL"];
+      const signal = signals[Math.floor(Math.random() * signals.length)];
+      document.getElementById("signal").textContent = signal;
+      setTimeout(() => {
+        document.getElementById("signal").textContent = "";
+      }, 3000);
+    }
+
+    window.onclick = function(event) {
+      if (!event.target.matches('.selected-option')) {
+        document.getElementById("options").style.display = "none";
+      }
+    }
+  </script>
+</body>
+</html>
